@@ -24,9 +24,12 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Initialize database connection
-await connectDB();
-seedDefaultVendors();
+// Initialize database connection asynchronously (non-blocking)
+connectDB().then(() => {
+  seedDefaultVendors();
+}).catch(err => {
+  console.error("Database connection initialization failed:", err);
+});
 
 // Root route
 app.get('/', (req, res) => {

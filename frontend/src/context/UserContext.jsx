@@ -47,8 +47,16 @@ export const UserProvider = ({ children }) => {
         body: JSON.stringify(vendorData)
       });
       if (!res.ok) {
-        const errorData = await res.json().catch(() => ({}));
-        throw new Error(errorData.error || "Failed to register vendor");
+        const text = await res.text().catch(() => "");
+        let errorMsg = "Failed to register vendor";
+        try {
+          const json = JSON.parse(text);
+          if (json.error) errorMsg = json.error;
+        } catch (e) {
+          // Expose HTTP status and first 120 characters of raw HTML error (like Vercel gateway timeout pages)
+          errorMsg = `Server Error (${res.status}): ${text.replace(/<[^>]*>/g, '').slice(0, 120).trim()}`;
+        }
+        throw new Error(errorMsg);
       }
       const newVendor = await res.json();
       await fetchVendors();

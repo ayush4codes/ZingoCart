@@ -69,11 +69,13 @@ const writeJSON = (filePath, data) => {
 export let useFallback = false;
 
 export async function connectDB() {
-  // Override local DNS to Google/Cloudflare DNS to bypass SRV query failures
-  try {
-    dns.setServers(['8.8.8.8', '1.1.1.1']);
-  } catch (dnsErr) {
-    console.warn("⚠️ DNS configuration warning:", dnsErr.message);
+  // Override local DNS only when running locally (not on Vercel) to bypass SRV query failures
+  if (!process.env.VERCEL) {
+    try {
+      dns.setServers(['8.8.8.8', '1.1.1.1']);
+    } catch (dnsErr) {
+      console.warn("⚠️ DNS configuration warning:", dnsErr.message);
+    }
   }
 
   const uri = process.env.MONGODB_URI;
