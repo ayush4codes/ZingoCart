@@ -46,7 +46,10 @@ export const UserProvider = ({ children }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(vendorData)
       });
-      if (!res.ok) throw new Error("Failed to register vendor");
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.error || "Failed to register vendor");
+      }
       const newVendor = await res.json();
       await fetchVendors();
       setActiveVendor(newVendor);
