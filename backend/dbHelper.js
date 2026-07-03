@@ -19,20 +19,51 @@ const PRODUCTS_FILE = path.join(DATA_DIR, 'products.json');
 const VENDORS_FILE = path.join(DATA_DIR, 'vendors.json');
 const ORDERS_FILE = path.join(DATA_DIR, 'orders.json');
 
+// In-memory cache for serverless environments where filesystem is read-only
+const memoryDb = {
+  products: null,
+  vendors: null,
+  orders: null
+};
+
 const readJSON = (filePath) => {
-  if (!fs.existsSync(filePath)) {
-    fs.writeFileSync(filePath, JSON.stringify([], null, 2));
-    return [];
+  const key = path.basename(filePath, '.json');
+  if (process.env.VERCEL && memoryDb[key]) {
+    return memoryDb[key];
   }
-  try {
-    return JSON.parse(fs.readFileSync(filePath, 'utf8'));
-  } catch (err) {
-    return [];
+
+  let data = [];
+  if (fs.existsSync(filePath)) {
+    try {
+      data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    } catch (err) {
+      data = [];
+    }
+  } else {
+    if (!process.env.VERCEL) {
+      try {
+        fs.writeFileSync(filePath, JSON.stringify([], null, 2));
+      } catch (e) {}
+    }
   }
+
+  if (process.env.VERCEL) {
+    memoryDb[key] = data;
+  }
+  return data;
 };
 
 const writeJSON = (filePath, data) => {
-  fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+  const key = path.basename(filePath, '.json');
+  if (process.env.VERCEL) {
+    memoryDb[key] = data;
+    return;
+  }
+  try {
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+  } catch (err) {
+    console.error("Error writing JSON database file:", err.message);
+  }
 };
 
 export let useFallback = false;
