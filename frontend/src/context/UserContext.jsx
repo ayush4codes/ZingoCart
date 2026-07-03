@@ -53,7 +53,7 @@ export const UserProvider = ({ children }) => {
           const json = JSON.parse(text);
           if (json.error) errorMsg = json.error;
         } catch (e) {
-          // Expose HTTP status and first 120 characters of raw HTML error (like Vercel gateway timeout pages)
+          // Extract text from raw HTML errors
           errorMsg = `Server Error (${res.status}): ${text.replace(/<[^>]*>/g, '').slice(0, 120).trim()}`;
         }
         throw new Error(errorMsg);

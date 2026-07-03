@@ -137,19 +137,14 @@ app.patch('/api/orders/:orderId/items/:itemId', async (req, res) => {
 
 // Start Server (local development only)
 if (!process.env.VERCEL) {
-  // When running locally, connect DB here
-  connectDB().then(() => {
-    seedDefaultVendors();
+  connectDB().then(async () => {
+    await seedDefaultVendors();
     app.listen(PORT, () => {
       console.log(`🚀 ZingoCart Server running on http://localhost:${PORT}`);
     });
   }).catch(err => {
-    console.error("Database connection failed:", err);
-    // Start anyway with fallback
-    seedDefaultVendors();
-    app.listen(PORT, () => {
-      console.log(`🚀 ZingoCart Server running on http://localhost:${PORT} (fallback mode)`);
-    });
+    console.error("❌ Database connection failed. Exiting...", err);
+    process.exit(1);
   });
 }
 

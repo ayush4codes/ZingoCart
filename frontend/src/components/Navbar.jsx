@@ -19,10 +19,7 @@ const Navbar = ({ onCartOpen, currentTab, setCurrentTab }) => {
             <span className="brand-tagline">Your Indian Grocery Hub</span>
           </div>
         </div>
-
-        {/* Navigation & Controls */}
         <div className="nav-actions">
-          {/* Simulation Controls: Role Switcher */}
           <div className="role-toggle">
             <button 
               className={`role-btn ${role === 'buyer' ? 'active' : ''}`}
@@ -46,15 +43,12 @@ const Navbar = ({ onCartOpen, currentTab, setCurrentTab }) => {
             </button>
           </div>
 
-          {/* Context-Specific Actions */}
           {role === 'buyer' ? (
-            /* Buyer Cart Button */
             <button className="cart-trigger" onClick={onCartOpen} title="Open Cart">
               <ShoppingCart size={20} />
               {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
             </button>
           ) : (
-            /* Vendor selector dropdown for easy testing/simulation */
             vendors.length > 0 && (
               <div className="vendor-selector-inline">
                 <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Simulating:</span>

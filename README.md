@@ -16,7 +16,7 @@ ZingoCart is a premium, high-performance multi-vendor grocery marketplace built 
 * **Efulfillment Panel**: Displays sales metrics (Total Revenue, Active Orders, Low Stock Alerts).
 * **Inventory Manager**: Live product control center for vendors to list new grocery items, update prices or stock, and delete products.
 * **Order Fulfillment Board**: Multi-vendor order splits! Allows each vendor to see only their items in a customer's order and change their fulfillment state (`Pending`, `Shipped`, `Delivered`, `Cancelled`) independently.
-* **Instant Shop Creation**: Add new simulated vendor stores dynamically using the registration interface.
+* **Instant Shop Creation**: Add new simulated vendor stores dynamically using the registration interface with user-facing validation error messages.
 
 ### 🎨 3. Premium Design System
 * Customized **Outfit** sans-serif font family.
@@ -32,8 +32,7 @@ ZingoCart is a premium, high-performance multi-vendor grocery marketplace built 
 * **Frontend**: React (Vite), Lucide Icons, Custom CSS Variables
 * **Backend**: Node.js, Express.js
 * **Database**: MongoDB Atlas (via Mongoose ODM)
-* **Database Fallback Mode**: The backend features an automatic local JSON database fallback (`backend/data/`) to keep the app fully operational if Atlas goes offline.
-* **DNS SRV Resolve Patch**: Native DNS resolution override inside `dbHelper.js` forcing Google (`8.8.8.8`) and Cloudflare (`1.1.1.1`) resolvers to prevent standard Windows querySrv failures.
+* **DNS SRV Resolve Patch**: Native DNS resolution override inside `dbHelper.js` forcing Google (`8.8.8.8`) and Cloudflare (`1.1.1.1`) resolvers to prevent standard Windows querySrv failures (automatically bypassed in Vercel to preserve cloud DNS routes).
 
 ---
 
@@ -84,25 +83,27 @@ ZingoCart is a premium, high-performance multi-vendor grocery marketplace built 
 
 ```text
 grocery/
+├── api/
+│   └── index.js          # Vercel serverless function entrypoint (ensures DB readiness)
 ├── backend/
 │   ├── models/           # Mongoose schemas (Product, Order, Vendor)
-│   ├── data/             # JSON Fallback database storage
-│   ├── dbHelper.js       # Auto-switching MongoDB & JSON database controller
+│   ├── dbHelper.js       # MongoDB helper utilities and data access methods
 │   ├── server.js         # API Server entry point
 │   ├── package.json
 │   └── .env
-└── frontend/
-    ├── public/           # Favicons & Manifests
-    ├── src/
-    │   ├── assets/       # ZingoCart brand logo
-    │   ├── components/   # Navbar, CartDrawer
-    │   ├── context/      # CartContext, UserContext
-    │   ├── pages/        # Catalog, Checkout, VendorDashboard
-    │   ├── App.jsx       # Layout shell and tab routing
-    │   ├── App.css       # Layout styles
-    │   ├── index.css     # Global reset & typography
-    │   └── main.jsx
-    ├── index.html
-    └── package.json
-```
-"# ZingoCart" 
+├── frontend/
+│   ├── public/           # Favicons & Manifests
+│   ├── src/
+│   │   ├── assets/       # ZingoCart brand logo
+│   │   ├── components/   # Navbar, CartDrawer
+│   │   ├── context/      # CartContext, UserContext
+│   │   ├── pages/        # Catalog, Checkout, VendorDashboard
+│   │   ├── App.jsx       # Layout shell and tab routing
+│   │   ├── App.css       # Layout styles
+│   │   ├── index.css     # Global reset & typography
+│   │   └── main.jsx
+│   ├── index.html
+│   └── package.json
+├── package.json          # Root package.json for Vercel dependency resolution
+└── vercel.json           # Vercel deployment configuration (routing, serverless builds)
+``` 

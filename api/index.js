@@ -11,7 +11,7 @@ let dbInitialized = false;
 async function ensureDB() {
   if (!dbInitialized) {
     await connectDB();
-    seedDefaultVendors();
+    await seedDefaultVendors();
     dbInitialized = true;
   }
 }
