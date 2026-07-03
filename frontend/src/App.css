@@ -5,7 +5,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(11, 15, 25, 0.8);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-color);
@@ -60,7 +60,7 @@
 /* Selector switches */
 .role-toggle {
   display: flex;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.05);
   padding: 4px;
   border-radius: 30px;
   border: 1px solid var(--border-color);
@@ -90,13 +90,13 @@
 
 .role-btn:not(.active):hover {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(0, 0, 0, 0.02);
 }
 
 /* Cart Trigger button */
 .cart-trigger {
   position: relative;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.05);
   border: 1px solid var(--border-color);
   padding: 10px;
   border-radius: 50%;
@@ -183,7 +183,7 @@
 
 .search-input-wrapper input {
   width: 100%;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(0, 0, 0, 0.02);
   border: 1px solid var(--border-color);
   padding: 10px 12px 10px 38px;
   border-radius: var(--radius-sm);
@@ -193,7 +193,7 @@
 
 .search-input-wrapper input:focus {
   border-color: var(--primary);
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.04);
   box-shadow: 0 0 0 3px var(--primary-glow);
 }
 
@@ -230,7 +230,7 @@
 }
 
 .category-pill:not(.active):hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(0, 0, 0, 0.03);
   color: var(--text-primary);
 }
 
@@ -256,7 +256,7 @@
 
 .vendor-select {
   width: 100%;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(0, 0, 0, 0.02);
   border: 1px solid var(--border-color);
   padding: 10px;
   border-radius: var(--radius-sm);
@@ -309,7 +309,7 @@ select option {
 
 .product-image-container {
   height: 180px;
-  background: #111827;
+  background: var(--bg-surface);
   position: relative;
   overflow: hidden;
 }
@@ -329,7 +329,7 @@ select option {
   position: absolute;
   top: 12px;
   left: 12px;
-  background: rgba(11, 15, 25, 0.75);
+  background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(4px);
   padding: 4px 10px;
   border-radius: 20px;
@@ -419,7 +419,7 @@ select option {
 }
 
 .out-of-stock-btn {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(0, 0, 0, 0.02);
   color: var(--text-muted);
   border: 1px solid var(--border-color);
   padding: 8px 12px;
@@ -454,7 +454,7 @@ select option {
   width: 100%;
   max-width: 450px;
   height: 100vh;
-  background: #111827;
+  background: var(--bg-surface);
   border-left: 1px solid var(--border-color);
   box-shadow: var(--shadow-lg);
   z-index: 1001;
@@ -489,7 +489,7 @@ select option {
 }
 
 .cart-close-btn:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.05);
   color: var(--text-primary);
 }
 
@@ -516,7 +516,7 @@ select option {
   display: flex;
   gap: 14px;
   padding: 12px;
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(0, 0, 0, 0.015);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
 }
@@ -526,7 +526,7 @@ select option {
   height: 70px;
   object-fit: cover;
   border-radius: var(--radius-sm);
-  background: #1f2937;
+  background: var(--bg-surface-hover);
 }
 
 .cart-item-details {
@@ -564,7 +564,7 @@ select option {
 .qty-counter {
   display: flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.05);
   border: 1px solid var(--border-color);
   border-radius: 4px;
 }
@@ -577,7 +577,7 @@ select option {
 
 .qty-btn:hover {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .qty-val {
@@ -600,7 +600,7 @@ select option {
 .cart-drawer-footer {
   padding: 24px;
   border-top: 1px solid var(--border-color);
-  background: rgba(17, 24, 39, 0.9);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .cart-summary-row {
@@ -754,7 +754,7 @@ select option {
 .products-table th {
   font-weight: 600;
   color: var(--text-secondary);
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(0, 0, 0, 0.015);
 }
 
 .product-row-info {
@@ -768,7 +768,7 @@ select option {
   height: 40px;
   object-fit: cover;
   border-radius: 4px;
-  background: #1f2937;
+  background: var(--bg-surface-hover);
 }
 
 .badge-stock {
@@ -794,7 +794,7 @@ select option {
 }
 
 .action-icon-btn {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.05);
   border: 1px solid var(--border-color);
   padding: 6px;
   border-radius: 6px;
@@ -860,7 +860,7 @@ select option {
 
 .form-control {
   width: 100%;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(0, 0, 0, 0.02);
   border: 1px solid var(--border-color);
   padding: 10px 14px;
   border-radius: var(--radius-sm);
@@ -871,7 +871,7 @@ select option {
 .form-control:focus {
   border-color: var(--primary);
   box-shadow: 0 0 0 3px var(--primary-glow);
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .form-row-2 {
@@ -888,7 +888,7 @@ select option {
 }
 
 .cancel-btn {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.05);
   border: 1px solid var(--border-color);
   padding: 10px 20px;
   border-radius: var(--radius-sm);
@@ -898,7 +898,7 @@ select option {
 }
 
 .cancel-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.08);
   color: var(--text-primary);
 }
 
@@ -975,7 +975,7 @@ select option {
 }
 
 .order-customer-details {
-  background: rgba(255, 255, 255, 0.01);
+  background: rgba(0, 0, 0, 0.01);
   border: 1px solid var(--border-color);
   padding: 14px;
   border-radius: var(--radius-sm);
@@ -1010,7 +1010,7 @@ select option {
 }
 
 .status-select {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.05);
   border: 1px solid var(--border-color);
   padding: 4px 8px;
   border-radius: 4px;
@@ -1136,7 +1136,7 @@ select option {
 .category-chip {
   padding: 8px 16px;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(0, 0, 0, 0.02);
   border: 1px solid var(--border-color);
   font-size: 0.85rem;
   font-weight: 600;
@@ -1146,7 +1146,7 @@ select option {
 }
 
 .category-chip:hover {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.04);
   border-color: var(--primary);
 }
 

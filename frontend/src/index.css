@@ -5,9 +5,9 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: dark;
-  color: #f3f4f6;
-  background-color: #0b0f19;
+  color-scheme: light;
+  color: #1f2937;
+  background-color: #f9fafb;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,15 +15,15 @@
   -moz-osx-font-smoothing: grayscale;
 
   /* Premium Design Tokens (Extracted from ZingoCart Logo) */
-  --bg-main: #0b0f19;
-  --bg-surface: #151c2c;
-  --bg-surface-hover: #1e293b;
-  --border-color: rgba(255, 255, 255, 0.08);
-  --border-color-glow: rgba(141, 198, 63, 0.25);
+  --bg-main: #f9fafb;
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #f3f4f6;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --border-color-glow: rgba(141, 198, 63, 0.4);
   
   --primary: #8dc63f; /* Logo Lime Green */
   --primary-hover: #7db037;
-  --primary-glow: rgba(141, 198, 63, 0.15);
+  --primary-glow: rgba(141, 198, 63, 0.2);
   
   --accent: #f96e14; /* Logo Vivid Orange */
   --accent-hover: #e05e0d;
@@ -31,17 +31,17 @@
   --danger: #ef4444;
   --danger-hover: #dc2626;
 
-  --text-primary: #f9fafb;
-  --text-secondary: #9ca3af;
-  --text-muted: #6b7280;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #9ca3af;
 
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 20px;
   
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.5);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.12);
   
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -86,7 +86,7 @@ button, input, select, textarea {
   background: var(--bg-main);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.12);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
@@ -146,7 +146,7 @@ button, input, select, textarea {
 }
 
 .glass-card {
-  background: rgba(21, 28, 44, 0.7);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
