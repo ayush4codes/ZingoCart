@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
-import dns from 'dns';
 
 import Product from './models/Product.js';
 import Vendor from './models/Vendor.js';
@@ -11,8 +10,13 @@ import Order from './models/Order.js';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = path.join(__dirname, 'data');
 
-if (!fs.existsSync(DATA_DIR)) {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
+// Wrap in try-catch: Vercel's filesystem is read-only, so mkdirSync will throw EROFS
+try {
+  if (!fs.existsSync(DATA_DIR)) {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+  }
+} catch (e) {
+  // Read-only filesystem (Vercel) — data dir won't be created, that's fine
 }
 
 const PRODUCTS_FILE = path.join(DATA_DIR, 'products.json');
@@ -69,10 +73,11 @@ const writeJSON = (filePath, data) => {
 export let useFallback = false;
 
 export async function connectDB() {
-  // Override local DNS only when running locally (not on Vercel) to bypass SRV query failures
+  // Override DNS only when running locally to bypass SRV query failures
   if (!process.env.VERCEL) {
     try {
-      dns.setServers(['8.8.8.8', '1.1.1.1']);
+      const dns = await import('dns');
+      dns.default.setServers(['8.8.8.8', '1.1.1.1']);
     } catch (dnsErr) {
       console.warn("⚠️ DNS configuration warning:", dnsErr.message);
     }
@@ -87,7 +92,7 @@ export async function connectDB() {
 
   try {
     mongoose.set('strictQuery', false);
-    await mongoose.connect(uri, { serverSelectionTimeoutMS: 5000 });
+    await mongoose.connect(uri, { serverSelectionTimeoutMS: 10000 });
     console.log("⚡ Connected to MongoDB Atlas successfully!");
   } catch (error) {
     console.error("❌ Failed to connect to MongoDB Atlas:", error.message);

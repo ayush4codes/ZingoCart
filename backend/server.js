@@ -24,13 +24,6 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Initialize database connection asynchronously (non-blocking)
-connectDB().then(() => {
-  seedDefaultVendors();
-}).catch(err => {
-  console.error("Database connection initialization failed:", err);
-});
-
 // Root route
 app.get('/', (req, res) => {
   res.send('ZingoCart Multi-Vendor Grocery Marketplace API is running...');
@@ -142,10 +135,21 @@ app.patch('/api/orders/:orderId/items/:itemId', async (req, res) => {
   }
 });
 
-// Start Server
-if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
-  app.listen(PORT, () => {
-    console.log(`🚀 ZingoCart Server running on http://localhost:${PORT}`);
+// Start Server (local development only)
+if (!process.env.VERCEL) {
+  // When running locally, connect DB here
+  connectDB().then(() => {
+    seedDefaultVendors();
+    app.listen(PORT, () => {
+      console.log(`🚀 ZingoCart Server running on http://localhost:${PORT}`);
+    });
+  }).catch(err => {
+    console.error("Database connection failed:", err);
+    // Start anyway with fallback
+    seedDefaultVendors();
+    app.listen(PORT, () => {
+      console.log(`🚀 ZingoCart Server running on http://localhost:${PORT} (fallback mode)`);
+    });
   });
 }
 
