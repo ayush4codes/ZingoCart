@@ -64,7 +64,7 @@ const VendorDashboard = () => {
     if (!activeVendor) return;
     try {
       setLoadingProducts(true);
-      const res = await fetch(`http://localhost:5000/api/products?vendorId=${activeVendor._id}`);
+      const res = await fetch(`/api/products?vendorId=${activeVendor._id}`);
       const data = await res.json();
       setProducts(data);
 
@@ -86,7 +86,7 @@ const VendorDashboard = () => {
     if (!activeVendor) return;
     try {
       setLoadingOrders(true);
-      const res = await fetch(`http://localhost:5000/api/orders?vendorId=${activeVendor._id}`);
+      const res = await fetch(`/api/orders?vendorId=${activeVendor._id}`);
       const data = await res.json();
       setOrders(data);
 
@@ -135,14 +135,14 @@ const VendorDashboard = () => {
       let res;
       if (editProduct) {
         // Edit Product
-        res = await fetch(`http://localhost:5000/api/products/${editProduct._id}`, {
+        res = await fetch(`/api/products/${editProduct._id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
       } else {
         // Add Product
-        res = await fetch('http://localhost:5000/api/products', {
+        res = await fetch('/api/products', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
@@ -187,7 +187,7 @@ const VendorDashboard = () => {
   const handleDeleteProduct = async (id) => {
     if (!window.confirm("Are you sure you want to delete this product?")) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/products/${id}`, {
+      const res = await fetch(`/api/products/${id}`, {
         method: 'DELETE'
       });
       if (!res.ok) throw new Error("Failed to delete product");
@@ -200,7 +200,7 @@ const VendorDashboard = () => {
   // Update Item fulfillment Status
   const handleItemStatusChange = async (orderId, itemId, newStatus) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/orders/${orderId}/items/${itemId}`, {
+      const res = await fetch(`/api/orders/${orderId}/items/${itemId}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

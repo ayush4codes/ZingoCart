@@ -11,7 +11,7 @@ export const UserProvider = ({ children }) => {
   const fetchVendors = async () => {
     try {
       setLoading(true);
-      const res = await fetch('http://localhost:5000/api/vendors');
+      const res = await fetch('/api/vendors');
       const data = await res.json();
       setVendors(data);
       if (data.length > 0 && !activeVendor) {
@@ -41,7 +41,7 @@ export const UserProvider = ({ children }) => {
 
   const registerVendor = async (vendorData) => {
     try {
-      const res = await fetch('http://localhost:5000/api/vendors', {
+      const res = await fetch('/api/vendors', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(vendorData)

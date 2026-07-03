@@ -31,7 +31,7 @@ const Catalog = () => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        let url = new URL('http://localhost:5000/api/products');
+        let url = new URL('/api/products', window.location.origin);
         
         if (selectedCategory !== 'All') {
           url.searchParams.append('category', selectedCategory);
