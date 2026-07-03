@@ -268,6 +268,12 @@
   border-color: var(--primary);
 }
 
+/* Style dropdown options globally for visibility */
+select option {
+  background-color: #ffdab9; /* Peach color */
+  color: #1a1a2e; /* Dark text for readability */
+}
+
 /* Product Catalog Grid */
 .products-container {
   display: flex;
