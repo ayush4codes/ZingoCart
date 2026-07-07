@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { UserProvider } from './context/UserContext';
+import React, { useState, useEffect } from 'react';
+import { UserProvider, useUser } from './context/UserContext';
 import { CartProvider } from './context/CartContext';
 import Navbar from './components/Navbar';
 import CartDrawer from './components/CartDrawer';
@@ -9,8 +9,30 @@ import VendorDashboard from './pages/VendorDashboard';
 import './App.css';
 
 function AppContent() {
-  const [currentTab, setCurrentTab] = useState('catalog'); // 'catalog', 'checkout', 'dashboard'
+  const { setRole } = useUser();
+  const [path, setPath] = useState(window.location.pathname);
+  const [currentTab, setCurrentTab] = useState('catalog'); // 'catalog', 'checkout'
   const [isCartOpen, setIsCartOpen] = useState(false);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const currentPath = window.location.pathname;
+      setPath(currentPath);
+      if (currentPath.startsWith('/vendor')) {
+        setRole('vendor');
+      } else {
+        setRole('buyer');
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    // Initialize role alignment on mount
+    handlePopState();
+
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [setRole]);
+
+  const isVendorRoute = path.startsWith('/vendor');
 
   return (
     <div>
@@ -26,13 +48,16 @@ function AppContent() {
         onCheckout={() => setCurrentTab('checkout')}
       />
 
-      {currentTab === 'catalog' && <Catalog />}
-      
-      {currentTab === 'checkout' && (
-        <Checkout onBackToCatalog={() => setCurrentTab('catalog')} />
+      {isVendorRoute ? (
+        <VendorDashboard />
+      ) : (
+        <>
+          {currentTab === 'catalog' && <Catalog />}
+          {currentTab === 'checkout' && (
+            <Checkout onBackToCatalog={() => setCurrentTab('catalog')} />
+          )}
+        </>
       )}
-      
-      {currentTab === 'dashboard' && <VendorDashboard />}
     </div>
   );
 }

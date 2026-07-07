@@ -3,7 +3,9 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [role, setRole] = useState('buyer'); // 'buyer' or 'vendor'
+  const [role, setRole] = useState(() => {
+    return window.location.pathname.startsWith('/vendor') ? 'vendor' : 'buyer';
+  });
   const [vendors, setVendors] = useState([]);
   const [activeVendor, setActiveVendor] = useState(null);
   const [loading, setLoading] = useState(true);
